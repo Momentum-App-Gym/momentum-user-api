@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://vitorugoc/user-api-momentum:1.0.0
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0

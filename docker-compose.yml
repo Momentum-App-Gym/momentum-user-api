@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  user-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - /app/src
+    environment:
+      - JAVA_OPTS=-Xmx512m
