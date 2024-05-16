@@ -1,13 +1,22 @@
 version: '3.8'
 
 services:
-  user-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  app:
+    build: .
     ports:
       - "8080:8080"
-    volumes:
-      - /app/src
     environment:
-      - JAVA_OPTS=-Xmx512m
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/user_api
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: user_api
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
